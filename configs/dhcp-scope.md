@@ -1,3 +1,5 @@
+
+
 1️⃣ Lab IP Plan 
     VLAN	Name	Subnet	Gateway	Notes
     10	HR	192.168.10.0/24	192.168.10.1	HR PCs
