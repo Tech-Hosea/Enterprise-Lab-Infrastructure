@@ -1,92 +1,96 @@
-# 🏢 Enterprise IT Infrastructure Homelab
+# 🏢 Enterprise IT Lab Infrastructure  
 
-This project simulates a **real-world enterprise IT environment** using a Dell PowerEdge T330, Windows Server 2022, pfSense firewall, and Cisco Catalyst 3750X switch.  
-It demonstrates skills in **Active Directory, Group Policy, VLAN segmentation, firewall rules, VPN, and SNMP monitoring** — core responsibilities for IT Support, SysAdmin, and Cybersecurity roles.
+A hands-on **enterprise-grade homelab project** simulating a corporate IT environment.  
+This lab demonstrates skills across **Active Directory, Networking, pfSense Firewall, Cisco Switching, VPN, File Sharing, and Network Monitoring** — the same tools and workflows used in enterprise IT.  
 
----
-
-## 🚀 Lab Overview
-
-- **Active Directory (AD DS)** – with OUs for HR, IT, Finance
-- **Group Policy** – password policies, drive mapping, USB restrictions
-- **pfSense Firewall** – WAN/LAN config, firewall rules, VPN setup
-- **Cisco 3750X** – VLANs, trunks, access ports
-- **DNS/DHCP** – domain-integrated DNS, DHCP scopes & reservations
-- **File Sharing** – NTFS permissions by department
-- **Monitoring** – SNMP monitoring with PRTG and network topology map
+This portfolio highlights my ability to **design, deploy, and manage enterprise infrastructure** in a secure, structured, and documented way.  
 
 ---
 
-## 🛠️ Technologies Used
-- **Windows Server 2022** – AD DS, DNS, DHCP, GPO
-- **pfSense** – Firewall, VPN (OpenVPN), DHCP Relay
-- **Cisco Catalyst 3750X** – VLANs, trunking
-- **PRTG / LibreNMS** – SNMP monitoring
-- **Windows 10 Clients** – domain-joined workstations
+## 📌 Project Overview
+This lab was built on a **Dell PowerEdge T330 server** running Windows Server 2022, pfSense, Cisco Catalyst 3750X, and multiple Windows 10 clients.  
+
+### Key Features:
+- **Active Directory Domain Services (AD DS)** with OUs for HR, IT, Finance
+- **Group Policy Objects (GPOs)** for drive mapping, password enforcement, USB restrictions
+- **pfSense Firewall** with WAN/LAN, inter-VLAN routing, and VPN (OpenVPN)
+- **Cisco Catalyst 3750X** VLAN segmentation (HR, IT, Finance, Management)
+- **DHCP & DNS** integrated with pfSense + AD
+- **SNMP Monitoring** with PRTG / LibreNMS
+- **NTFS File Permissions** for secure file shares per department
 
 ---
 
-## 📌 Key Features
+## 🖥️ Lab Architecture
 
-### 🔹 Active Directory & Group Policy
-- OUs: HR, IT, Finance  
-- Users & groups with naming convention: `firstname.lastname`  
-- GPOs applied:  
-  - Strong password policy  
-  - Drive mappings (H:, F:)  
-  - Disable USB storage devices  
-  - OU-specific restrictions  
+### 🔹 Network Topology (Visual)
+This diagram shows physical connectivity and VLAN segmentation:
 
-### 🔹 pfSense Firewall
-- WAN: `192.168.1.183` (DHCP from ISP modem)  
-- LAN: `192.168.10.1/24` (static)  
-- Rules:  
-  - Allow HR → Internet  
-  - Block IT → HR subnet  
-  - VPN enabled for remote access (OpenVPN)  
+![Network Topology](images/network-topology.png)
 
-### 🔹 Cisco 3750X VLANs
-- VLAN 10 – HR  
-- VLAN 20 – IT  
-- VLAN 30 – Finance  
-- VLAN 99 – Management  
-- Trunk between pfSense & switch  
-- Access ports mapped to departments  
+### 🔹 High-Level Enterprise Architecture
+Layered view of users, VLANs, network devices, and core services:
 
-### 🔹 File Sharing & NTFS Permissions
-- HR share → Modify for HR, Read-only for others  
-- Finance share → Finance-only access  
-- Verified access control using domain logins  
-
-### 🔹 Network Monitoring
-- SNMP enabled on pfSense, Cisco switch, and Windows Server  
-- Monitored in PRTG dashboard  
-- Auto-generated **topology map**  
+![Enterprise Architecture](images/enterprise-architecture.png)
 
 ---
 
-## 📊 Network Diagram
+## 📂 Step-by-Step Documentation
 
-![Lab Diagram](./docs/lab-diagram.png)
+Full guides are inside the **[docs/](docs/)** folder:  
 
----
+- [Active Directory Setup](docs/ActiveDirectory.md)  
+  *Install AD DS, promote domain controller, create OUs, users, and GPOs.*  
 
-## 🎯 Skills Demonstrated
-✔️ IT Infrastructure design & deployment  
-✔️ Identity & Access Management  
-✔️ VLAN segmentation & firewall rules  
-✔️ VPN configuration & testing  
-✔️ File system permissions & access control  
-✔️ SNMP monitoring & alerting  
-✔️ Troubleshooting & documentation  
+- [pfSense + Cisco VLAN Lab](docs/pfSense_Cisco.md)  
+  *Configure pfSense LAN/WAN, firewall rules, VLAN trunking, and client isolation.*  
 
----
+- [VPN & Remote Work](docs/VPN.md)  
+  *Enable OpenVPN for secure remote access.*  
 
-## ✅ Next Steps
-- Add **WSUS server** for patch management  
-- Deploy **SIEM (Wazuh/Graylog)** for log analysis  
-- Configure **site-to-site VPN** for branch simulation  
+- [Monitoring & SNMP](docs/Monitoring.md)  
+  *PRTG/LibreNMS setup with SNMP, alerts, and network map.*  
 
 ---
 
-👨‍💻 *Built in my Dell PowerEdge T330 Homelab to simulate enterprise IT environments for IT Support, System Administration, and Cybersecurity readiness.*
+## 🔐 Security & Policies
+- Password Policies (min length, complexity, expiry)  
+- USB Device Blocking via GPO  
+- VLAN Segmentation (HR cannot access IT resources)  
+- pfSense Firewall rules for traffic control  
+- VPN for remote employees  
+
+---
+
+## 📊 Monitoring & Reporting
+- **PRTG / LibreNMS Dashboard** monitors traffic, uptime, and CPU usage.  
+- SNMP-enabled devices include pfSense firewall, Cisco switch, and Windows Server.  
+
+*Screenshots available in the `images/` folder.*
+
+---
+
+## 🚀 Skills Demonstrated
+- **Windows Server Administration**: AD DS, GPO, DNS, DHCP  
+- **Network Engineering**: Cisco VLANs, trunking, inter-VLAN routing  
+- **Firewall & Security**: pfSense rules, VPN, subnet isolation  
+- **Monitoring & Alerts**: SNMP, dashboards, reporting  
+- **Documentation & Portfolio Building**: GitHub project showcase  
+
+---
+
+## 📈 Why This Project Matters
+This lab simulates the **daily responsibilities of an IT Support / IT Analyst role** in enterprise environments:
+- Managing users, groups, and access control  
+- Enforcing IT security policies  
+- Configuring switches, firewalls, and VLANs  
+- Monitoring infrastructure health  
+- Supporting remote employees securely  
+
+---
+
+## 📬 Contact
+👤 **Your Name**  
+💼 Aspiring **IT Support Specialist | IT Analyst | Cybersecurity Professional**  
+📧 [your.email@example.com]  
+🔗 [LinkedIn Profile](https://www.linkedin.com/)
