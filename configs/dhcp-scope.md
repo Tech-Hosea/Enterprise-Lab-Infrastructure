@@ -1,11 +1,7 @@
+1️⃣ Lab IP Plan
 
-
-1️⃣ Lab IP Plan 
-    VLAN	Name	Subnet	Gateway	Notes
-    10	HR	192.168.10.0/24	192.168.10.1	HR PCs
-    20	IT	192.168.20.0/24	192.168.20.1	IT PCs
-    30	FINANCE	192.168.30.0/24	192.168.30.1	Finance PCs
-    99	MANAGEMENT	192.168.99.0/24	192.168.99.1	Server, switch mgmt
+<img width="663" height="399" alt="DHCP scope" src="https://github.com/user-attachments/assets/c4123057-9b60-495b-8fa4-a8663f393f2f" />
+<img width="515" height="154" alt="IP Plan" src="https://github.com/user-attachments/assets/5cefde94-a96b-48e1-9ce1-92b00ba0b3a7" /> 
 
 DNS:
 Primary: 192.168.99.100 (Windows Server DC01)
@@ -24,6 +20,7 @@ Secondary: same or external
 Repeat similar steps for IT and Finance VLANs, adjusting subnet and IP ranges.
 
 3️⃣ IT VLAN 20
+
     Scope Name: IT_VLAN20
     IP Range: 192.168.20.50 – 192.168.20.200
     Gateway: 192.168.20.1
@@ -37,22 +34,23 @@ Repeat similar steps for IT and Finance VLANs, adjusting subnet and IP ranges.
     DNS: 192.168.99.100
 
 5️⃣ No DHCP: Management VLAN 99 
-DC01 
-IP: 192.168.99.100
-Gateway: 192.168.99.1
-DNS: 192.168.99.100
+
+    DC01 
+    IP: 192.168.99.100
+    Gateway: 192.168.99.1
+    DNS: 192.168.99.100
 
 6️⃣ How to add these scopes in Windows Server 2022
 
-Open DHCP console → expand server → IPv4 → Right-click → New Scope.
+    Open DHCP console → expand server → IPv4 → Right-click → New Scope.
    
-   Follow wizard:
-   Name scope (HR_VLAN10, etc.)
-   Enter Start/End IP, Subnet mask
-   Add exclusions (gateway + static devices)
-   Configure Lease duration
-   Configure Router (default gateway) → 192.168.x.1
-   Configure DNS servers → 192.168.99.100
-   Activate scope
+       Follow wizard:
+       Name scope (HR_VLAN10, etc.)
+       Enter Start/End IP, Subnet mask
+       Add exclusions (gateway + static devices)
+       Configure Lease duration
+       Configure Router (default gateway) → 192.168.x.1
+       Configure DNS servers → 192.168.99.100
+       Activate scope
 
 Repeat for IT and Finance VLANs.
