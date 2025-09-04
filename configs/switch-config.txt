@@ -1,0 +1,16 @@
+hostname LAB-SWITCH
+!
+vlan 10
+ name HR
+vlan 20
+ name IT
+vlan 30
+ name Finance
+vlan 99
+ name Management
+!
+int gi1/0/48
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,99
+!
+snmp-server community LABMONITOR RO
