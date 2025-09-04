@@ -18,7 +18,7 @@ vlan 10…vlan 99 → creates VLANs with names.
 VLAN 10 = HR, VLAN 20 = IT, VLAN 30 = Finance, VLAN 99 = Management.
 
 2️⃣ Trunk to pfSense
-interface GigabitEthernet1/0/48
+interface GigabitEthernet2/0/2
  description TRUNK_to_pfSense
  switchport trunk encapsulation dot1q
  switchport mode trunk
@@ -36,7 +36,7 @@ allowed vlan 10,20,30,99 → only these VLANs are allowed.
 spanning-tree portfast trunk → speeds up STP convergence on trunk port.
 
 3️⃣ Access Ports for HR, IT, Finance
-interface range GigabitEthernet1/0/1-8
+interface range GigabitEthernet2/0/1-8
  description HR_DESKS
  switchport mode access
  switchport access vlan 10
