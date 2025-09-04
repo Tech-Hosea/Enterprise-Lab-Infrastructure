@@ -45,7 +45,7 @@ Full guides are inside the **[docs/](docs/)** folder:
 - [pfSense + Cisco VLAN Lab](docs/pfSense_Cisco.md)  
   *Configure pfSense LAN/WAN, firewall rules, VLAN trunking, and client isolation.*  
 
-- [VPN & Remote Work](docs/VPN.md)  
+- [VPN & Remote Work](docs/vpn-config.md)  
   *Enable OpenVPN for secure remote access.*  
 
 - [Monitoring & SNMP](docs/Monitoring.md)  
