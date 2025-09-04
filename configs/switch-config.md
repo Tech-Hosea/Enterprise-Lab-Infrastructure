@@ -39,21 +39,21 @@ spanning-tree portfast trunk → speeds up STP convergence on trunk port.
 
 3️⃣ Access Ports for HR, IT, Finance
 
-    interface range GigabitEthernet2/0/1-8
+    interface range GigabitEthernet2/0/3-5
      description HR_DESKS
      switchport mode access
      switchport access vlan 10
      spanning-tree portfast
      no shut
     
-    interface range GigabitEthernet1/0/9-16
+    interface range GigabitEthernet2/0/6-8
      description IT_DESKS
      switchport mode access
      switchport access vlan 20
      spanning-tree portfast
      no shut
     
-    interface range GigabitEthernet1/0/17-24
+    interface range GigabitEthernet2/0/9-11
      description FIN_DESKS
      switchport mode access
      switchport access vlan 30
@@ -62,9 +62,9 @@ spanning-tree portfast trunk → speeds up STP convergence on trunk port.
 
 
 Explanation:
-Ports 1–8 → HR VLAN 10
-Ports 9–16 → IT VLAN 20
-Ports 17–24 → Finance VLAN 30
+Ports 3–5 → HR VLAN 10
+Ports 6–8 → IT VLAN 20
+Ports 9–11 → Finance VLAN 30
 switchport mode access → single VLAN per port.
 spanning-tree portfast → skips listening/learning phase for edge devices (PCs).
 
