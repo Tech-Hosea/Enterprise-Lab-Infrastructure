@@ -8,8 +8,9 @@ It’s structured step-by-step so you can reproduce it in a homelab or training 
 ## 0) Prereqs & One-Time Prep
 
 ### Set static IP (DC01)
-Server Manager → Local Server → Ethernet → Properties → IPv4:
+<img width="421" height="238" alt="staticIP(DC01)" src="https://github.com/user-attachments/assets/e34235d4-3eb1-4f42-9579-4183aa9bb1c2" />
 
+Server Manager → Local Server → Ethernet → Properties → IPv4:
 - **IP**: `192.168.99.100`  
 - **Mask**: `255.255.255.0`  
 - **Gateway**: `192.168.99.1`  
@@ -29,6 +30,7 @@ Server Manager → Local Server → Ethernet → Properties → IPv4:
 ---
 
 ## 1) Install AD DS & Promote DC (New Forest)
+<img width="443" height="309" alt="installAD" src="https://github.com/user-attachments/assets/8d97babd-8109-431f-9fc2-b57c8856243b" />
 
 1. Add the role:  
    Server Manager → Add roles and features → Role-based → select **DC01**  
@@ -46,6 +48,7 @@ Server Manager → Local Server → Ethernet → Properties → IPv4:
 ---
 
 ## 2) Configure DNS (Forwarders & Reverse Zone)
+<img width="387" height="239" alt="forwarder Reversezone" src="https://github.com/user-attachments/assets/d2de99d6-2b10-42fd-94bc-a6fefc244ade" />
 
 - **Forwarders**:  
   DNS → right-click server → Properties → Forwarders tab → Edit → add `192.168.99.1` (pfSense).  
@@ -66,9 +69,12 @@ Server Manager → Local Server → Ethernet → Properties → IPv4:
 2. Post-install task:  
    Server Manager (flag) → Complete DHCP configuration → **Authorize** with domain creds.
 
-3. Create a scope:  
-   - Name: `LAN-192.168.10.0/24`  (HR)
-   - Range: `192.168.10.50–192.168.10.200`  
+3. Create a scope:
+   
+    <img width="563" height="299" alt="DHCP scope" src="https://github.com/user-attachments/assets/ea01c703-c2c6-4d14-9967-44468292658f" />
+
+   - Name: `LAN-192.168.10.0/24`  (HR)                         
+   - Range: `192.168.10.50–192.168.10.200`                                                                         
    - Router: `192.168.99.1`  
    - DNS: `192.168.99.100` (DC01)  
    - Domain: `tech-hosea.local`
@@ -96,12 +102,12 @@ Server Manager → Local Server → Ethernet → Properties → IPv4:
    - Domain: `tech-hosea.local`  
    - Activate scope.
 
-4. Dynamic DNS updates:  
+5. Dynamic DNS updates:  
    - DHCP → Properties → DNS tab → **Always dynamically update DNS A and PTR records**  
    - Enable cleanup when lease is deleted.  
    - (Optional) Configure DNS credentials.
 
-5. Reservations:  
+6. Reservations:  
    - Example: `WIN10-01`, IP `192.168.10.61`, MAC `AA-BB-CC-DD-EE-FF`.
 
 ---
@@ -123,6 +129,7 @@ ADUC → right-click domain → New → Organizational Unit:
 ---
 
 ## 5) Create Users & Groups (AGDLP Model)
+<img width="332" height="199" alt="OU" src="https://github.com/user-attachments/assets/58c1186a-6322-4ec9-9b95-b2cea19cfaea" />
 
 **Naming conventions**:  
 - Users: `jdoe`, `asmith`  
@@ -138,6 +145,7 @@ ADUC → right-click domain → New → Organizational Unit:
 ---
 
 ## 6) File Server Shares & NTFS Permissions
+<img width="380" height="258" alt="FileShare" src="https://github.com/user-attachments/assets/b35bcc5f-9738-4e43-ba11-f7cf16788c89" />
 
 **Create folders** (preferably on a dedicated file server):  
 
@@ -149,6 +157,7 @@ D:\Shares\Public
 **Shares**:  
 - HR → `HR$`  
 - Finance → `Finance$`
+<img width="342" height="259" alt="Fileshare02" src="https://github.com/user-attachments/assets/a04a8eac-fa19-4a55-b464-bcf8b2e0db76" />
 
 **NTFS Permissions**:  
 - `DL_FS_HR_RW` → Modify  
@@ -164,6 +173,7 @@ Users → Global Groups → Domain Local → Permissions.
 
 ### 7A) Domain password policy
 Default Domain Policy →  
+<img width="518" height="293" alt="Policy" src="https://github.com/user-attachments/assets/fefcb81d-dd42-437b-bb87-a146d8818ffb" />
 
 - Min length: 12  
 - History: 24  
@@ -177,6 +187,7 @@ New GPO → Link to **Workstations OU**:
 
 ### 7C) Map drives (per dept.)
 New GPO → User Config → Preferences → Windows Settings → Drive Maps  
+<img width="374" height="268" alt="Drivemap" src="https://github.com/user-attachments/assets/cd4c0832-08bc-4d8c-9f0c-250789da9f88" />
 
 - HR Share (H:) → target `DL_FS_HR_RW`/`RO`  
 - Finance Share (F:) → target `DL_FS_Finance_RW`/`RO`
@@ -184,6 +195,7 @@ New GPO → User Config → Preferences → Windows Settings → Drive Maps
 ---
 
 ## 8) Join a Windows 10 Client
+<img width="476" height="333" alt="Users" src="https://github.com/user-attachments/assets/1d86057f-49ac-4ab3-888a-99821de09d55" />
 
 1. Set DNS → `192.168.99.1`  
 2. Renew IP (`ipconfig /release /renew`)  
