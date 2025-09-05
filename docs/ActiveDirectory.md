@@ -110,4 +110,95 @@ Server Manager → Local Server → Ethernet → Properties → IPv4:
 
 ADUC → right-click domain → New → Organizational Unit:
 
+      Corp
+      ├── Users
+      │ ├── HR
+      │ ├── IT
+      │ └── Finance
+      ├── Groups
+      ├── Workstations
+      └── Servers
+      
+
+---
+
+## 5) Create Users & Groups (AGDLP Model)
+
+**Naming conventions**:  
+- Users: `jdoe`, `asmith`  
+- Groups:  
+  - Global: `GG_HR_Users`, `GG_IT_Users`, `GG_Finance_Users`  
+  - Domain Local: `DL_FS_HR_RW`, `DL_FS_HR_RO`, `DL_FS_Finance_RW`, `DL_FS_Finance_RO`
+
+**Example users**:  
+- John Doe (`jdoe`) → member of `GG_HR_Users`  
+- Alice Smith (`asmith`) → member of `GG_Finance_Users`  
+- IT Admin (`itadmin`) → member of `GG_IT_Users` + `Domain Admins`
+
+---
+
+## 6) File Server Shares & NTFS Permissions
+
+**Create folders** (preferably on a dedicated file server):  
+
+D:\Shares\HR
+D:\Shares\Finance
+D:\Shares\Public
+
+
+**Shares**:  
+- HR → `HR$`  
+- Finance → `Finance$`
+
+**NTFS Permissions**:  
+- `DL_FS_HR_RW` → Modify  
+- `DL_FS_HR_RO` → Read  
+- Similar for Finance.
+
+**Group nesting (AGDLP)**:  
+Users → Global Groups → Domain Local → Permissions.
+
+---
+
+## 7) Group Policy (GPOs)
+
+### 7A) Domain password policy
+Default Domain Policy →  
+
+- Min length: 12  
+- History: 24  
+- Complexity: Enabled  
+- Max age: 90 days  
+- Lockout: 5 attempts / 15 minutes.
+
+### 7B) Disable USB storage
+New GPO → Link to **Workstations OU**:  
+`Computer Config → Policies → Admin Templates → System → Removable Storage Access → Deny all access`
+
+### 7C) Map drives (per dept.)
+New GPO → User Config → Preferences → Windows Settings → Drive Maps  
+
+- HR Share (H:) → target `DL_FS_HR_RW`/`RO`  
+- Finance Share (F:) → target `DL_FS_Finance_RW`/`RO`
+
+---
+
+## 8) Join a Windows 10 Client
+
+1. Set DNS → `192.168.99.1`  
+2. Renew IP (`ipconfig /release /renew`)  
+3. Join domain: `corp.lab` → provide Domain Admin creds → reboot.  
+4. Move into **Workstations OU**.
+
+---
+
+## 9) Verify GPOs Apply
+
+On CLIENT01:  
+
+```powershell
+gpupdate /force
+gpresult /r
+
+
 
