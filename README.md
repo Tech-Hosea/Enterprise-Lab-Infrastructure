@@ -49,7 +49,7 @@ Full guides are inside the **[docs/](docs/)** folder:
   *Enable OpenVPN for secure remote access.*  
 
 - [Monitoring & SNMP](docs/Monitoring.md)  
-  *PRTG/LibreNMS setup with SNMP, alerts, and network map.*  
+  *PRTG setup with SNMP, alerts, and network map.*  
 
 ---
 
@@ -90,7 +90,7 @@ This lab simulates the **daily responsibilities of an IT Support / IT Analyst ro
 ---
 
 ## 📬 Contact
-👤 **Your Name**  
+👤 Hosea Thang 
 💼 Aspiring **IT Support Specialist | IT Analyst | Cybersecurity Professional**  
-📧 [your.email@example.com]  
-🔗 [LinkedIn Profile](https://www.linkedin.com/)
+📧 hosealian@gmail.com  
+🔗 [LinkedIn Profile](https://www.linkedin.com/in/hosea-thang)
